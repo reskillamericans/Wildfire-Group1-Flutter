@@ -14,7 +14,7 @@ class WildfireUpdate {
 
 factory WildfireUpdate.fromJson(DocumentSnapshot data){
   return WildfireUpdate(firstName: data['firstName'],lastName: data['lastName'],phoneNumber:
-  data['phone-number'],location: data['location'],details: data['details']);
+  data['phoneNumber'],location: data['location'],details: data['details']);
 }
 
 Map<String,dynamic> toJson(){

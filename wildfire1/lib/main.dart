@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             stream: firestore.snapshots(),
             builder: (context, snapshot) {
 
-             var fireUpdates = snapshot.data?.docs.map((e) => WildfireUpdate.fromJson(e)).toList();
+             var wildfireUpdates = snapshot.data?.docs.map((e) => WildfireUpdate.fromJson(e)).toList();
                             print("fire ${snapshot.data?.docs[0].data()}");
               return Text(
                 'Latest Snapshot: ${DateTime.now()}',
