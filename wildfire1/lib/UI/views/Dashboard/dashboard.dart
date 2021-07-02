@@ -20,9 +20,10 @@ class _TheDashboardState extends State<TheDashboard> {
         backgroundColor: Colors.white,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 41,
+            height: 40,
             width: double.infinity,
             child: Container(
               padding: EdgeInsets.only(left: 25),
@@ -39,9 +40,10 @@ class _TheDashboardState extends State<TheDashboard> {
             ),
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 15),
+              SizedBox(
+                width: 333,
                 child: Row(
                   children: [
                     SvgPicture.asset("assets/icons/map-pin.svg"),
@@ -72,21 +74,19 @@ class _TheDashboardState extends State<TheDashboard> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: SizedBox(
-                  height: 60,
-                  width: 333,
-                  child: Container(
-                    color: Colors.white,
-                    child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                      textAlign: TextAlign.left,
-                    ),
+              SizedBox(
+                height: 60,
+                width: 333,
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  color: Colors.white,
+                  child: Text(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
@@ -94,9 +94,10 @@ class _TheDashboardState extends State<TheDashboard> {
             ],
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 15),
+              SizedBox(
+                width: 333,
                 child: Row(
                   children: [
                     SvgPicture.asset("assets/icons/map-pin.svg"),
@@ -127,21 +128,19 @@ class _TheDashboardState extends State<TheDashboard> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: SizedBox(
-                  height: 60,
-                  width: 333,
-                  child: Container(
-                    color: Colors.white,
-                    child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                      textAlign: TextAlign.left,
-                    ),
+              SizedBox(
+                height: 60,
+                width: 333,
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  color: Colors.white,
+                  child: Text(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
@@ -151,7 +150,7 @@ class _TheDashboardState extends State<TheDashboard> {
           Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Container(
                   width: 377,
                   height: 40,
@@ -179,6 +178,7 @@ class _TheDashboardState extends State<TheDashboard> {
                       ],
                     ),
                     style: OutlinedButton.styleFrom(
+                      primary: Colors.orange,
                       side: BorderSide(
                         color: Color.fromRGBO(255, 98, 76, 1),
                       ),
@@ -198,14 +198,19 @@ class _TheDashboardState extends State<TheDashboard> {
                       topLeft: Radius.circular(12)),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 10,
+                    ),
                     Stack(children: [
                       Container(
                         alignment: AlignmentDirectional.center,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 20, left: 13, right: 16),
+                              /*top: 20,*/ left: 13,
+                              right: 16),
                           child: Image.asset(
                             "assets/images/firefighter.png",
                             fit: BoxFit.cover,
@@ -216,191 +221,183 @@ class _TheDashboardState extends State<TheDashboard> {
                         alignment: AlignmentDirectional.center,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 20, left: 13, right: 16),
+                              /*top: 20,*/ left: 13,
+                              right: 16),
                           child: Image.asset(
                             "assets/images/darken.png",
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ]),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 16, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 20, 0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Fire Safety Tips:",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(height: 11),
+                            Text(
+                              "Test smoke detector batteries",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              "every 6 months to make sure they are",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              "still working.",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 103,
-                                width: 107,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child:
-                                      SvgPicture.asset("assets/icons/edit.svg"),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                "Report a Fire",
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50, right: 15),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: SvgPicture.asset(
+                                  "assets/icons/arrow-right-circle.svg"),
+                            ),
                           ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 103,
-                                width: 107,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child: SvgPicture.asset(
-                                      "assets/icons/thumbsup.svg"),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                "I'm Alive",
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "More",
                                 style: TextStyle(
                                     fontSize: 13,
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                     color: Colors.white),
-                                textAlign: TextAlign.center,
                               ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 103,
-                                width: 107,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: TextButton(
-                                  onPressed: () {},
-                                  child: SvgPicture.asset(
-                                      "assets/icons/help-circle.svg"),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                "Ask Anything",
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
+                    ]),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 103,
+                              width: 107,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextButton(
+                                onPressed: () {},
+                                child:
+                                    SvgPicture.asset("assets/icons/edit.svg"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Report a Fire",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 103,
+                              width: 107,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextButton(
+                                onPressed: () {},
+                                child: SvgPicture.asset(
+                                    "assets/icons/thumbsup.svg"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "I'm Alive",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 103,
+                              width: 107,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: TextButton(
+                                onPressed: () {},
+                                child: SvgPicture.asset(
+                                    "assets/icons/help-circle.svg"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Ask Anything",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: 35,
+                      height: 15,
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 41, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Fire Safety Tips:",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 11),
-                    Text(
-                      "Test smoke detector batteries",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      "every 6 months to make sure they are",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.left,
-                    ),
-                    SizedBox(height: 3),
-                    Text(
-                      "still working.",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(315, 70, 0, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: SvgPicture.asset(
-                          "assets/icons/arrow-right-circle.svg"),
-                    ),
-                    /*Text(
-                      "More",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.right,
-                    ),*/
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(335, 107, 0, 0),
-                child: Column(
-                  children: [
-                    Text(
-                      "More",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ],
