@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TheDashboard extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  _TheDashboardState createState() => _TheDashboardState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _TheDashboardState extends State<TheDashboard> {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
