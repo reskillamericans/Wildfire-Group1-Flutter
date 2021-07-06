@@ -24,6 +24,7 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter:
     sdk: flutter
+  flutter_screenutil: ^5.0.0+2
 
 
 
