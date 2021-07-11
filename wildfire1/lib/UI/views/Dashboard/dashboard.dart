@@ -1,15 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wildfire1/model/wildfire_model.dart';
+
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+var firestore = FirebaseFirestore.instance.collection("WildfireUpdates");
+
 class _MyHomePageState extends State<MyHomePage> {
-  @override
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -50,66 +57,73 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: 13.h,),
           Container(
             height: 220.h,
-            child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: EdgeInsets.only(left: 29.w, right: 42.w),
-                    child: Column(
-                      children: [
-                        Row(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: firestore.snapshots(),
+              builder: (context, snapshot) {
+                if(snapshot.hasData){
+                var wildfireUpdates = snapshot.data?.docs.map((e) => WildfireUpdate.fromJson(e)).toList();
+                print("fire ${snapshot.data?.docs[0].data()}");
+                return ListView.builder(
+                    itemCount: wildfireUpdates?.length,
+                  itemBuilder: (BuildContext context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: 29.w, right: 42.w),
+                        child: Column(
                           children: [
-                            SvgPicture.asset("assets/icons/map-pin.svg"),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text(
-                              "California",
-                              style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(126, 122, 143, 1)),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            SvgPicture.asset("assets/icons/ellipse.svg"),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text(
-                              "3hrs ago",
-                              style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(126, 122, 143, 1)),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8.h,
-                        ),
-                        Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, set do eiusmod tempor incididunt ut labore et dolore magna aliqua...",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black),
-                          textAlign: TextAlign.left,
-                        ),
-                        SizedBox(
-                          height: 11.h,
-                        ),
-                        SvgPicture.asset("assets/icons/line.svg"),
-                        SizedBox(
-                          height: 13.h,
-                        ),
-                      ],
+                            Row(
+                              children: [
+                                SvgPicture.asset("assets/icons/map-pin.svg"),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Text (wildfireUpdates![index].location,
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(126, 122, 143, 1)),),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                SvgPicture.asset("assets/icons/ellipse.svg"),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Text(
+                                  wildfireUpdates[index].when.toString(),
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(126, 122, 143, 1)),
+                                ),],),
+                                SizedBox(
+                                  height: 8.h,
+                                ),
+                                Text(
+                                  wildfireUpdates[index].details,
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black),
+                                  textAlign: TextAlign.left,
+                                ),
+                                SizedBox(
+                                  height: 11.h,
+                                ),
+                                SvgPicture.asset("assets/icons/line.svg"),
+                                SizedBox(
+                                  height: 13.h,
+                                ),
 
-                    ),
-                  );
 
-                }),
+                          ]
+                        ),
+                      );
+                  },
+
+                );}
+                return CircularProgressIndicator();
+              },
+            ),
           ),
           SizedBox(
             height: 17.h,
@@ -373,53 +387,51 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (int index) {},
+      /*bottomNavigationBar: BottomNavigationBar(
+        onTap: _onItemTapped,
         backgroundColor: Colors.transparent,
-        elevation: 0,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedLabelStyle: TextStyle(fontSize: 10.sp),
         selectedItemColor: Color.fromRGBO(255, 98, 77, 1),
         unselectedLabelStyle: TextStyle(fontSize: 10.sp),
         unselectedItemColor: Color.fromRGBO(195, 199, 210, 1),
-        currentIndex: 1,
-        type: BottomNavigationBarType.fixed,
-        items: [
+        currentIndex: _currentSelected,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/menu.svg"),
+              child: SvgPicture.asset("assets/icons/menu.svg", color: _currentSelected == 0? orange : grey),
             ),
             label: "Menu",
           ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/home.svg"),
+              child: SvgPicture.asset("assets/icons/home.svg", color: _currentSelected == 0? orange : grey),
             ),
             label: "Dashboard",
           ),
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-thumbs-up.svg"),
+                child: SvgPicture.asset("assets/icons/tiny-thumbs-up.svg", color: _currentSelected == 0? orange : grey),
               ),
               label: "Im Alive"),
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-bell.svg"),
+                child: SvgPicture.asset("assets/icons/tiny-bell.svg", color: _currentSelected == 0? orange : grey),
               ),
               label: "Updates"),
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-help-circle.svg"),
+                child: SvgPicture.asset("assets/icons/tiny-help-circle.svg", color: _currentSelected == 0? orange : grey),
               ),
               label: "Ask"),
         ],
-      ),
+      ),*/
     );
   }
 }

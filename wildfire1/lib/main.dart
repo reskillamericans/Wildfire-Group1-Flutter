@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wildfire1/UI/views/Dashboard/dashboard.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wildfire1/model/wildfire_model.dart';
+
 
 
 void main() async {
@@ -15,6 +15,7 @@ void main() async {
 
 
 class WildfireApp extends StatelessWidget {
+  const WildfireApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
@@ -42,39 +43,8 @@ class WildfireApp extends StatelessWidget {
 }
 
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  var firestore = FirebaseFirestore.instance.collection("WildfireUpdates");
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(''),
-        ),
-        body: Center(
-          child: StreamBuilder<QuerySnapshot>(
-            stream: firestore.snapshots(),
-            builder: (context, snapshot) {
 
-             var wildfireUpdates = snapshot.data?.docs.map((e) => WildfireUpdate.fromJson(e)).toList();
-                            print("fire ${snapshot.data?.docs[0].data()}");
-              return Text(
-                'Latest Snapshot: ${DateTime.now()}',
-                style: Theme.of(context).textTheme.caption,
 
-              );
-            },
-          ),
-
-        )
-
-    );
-  }
-}
