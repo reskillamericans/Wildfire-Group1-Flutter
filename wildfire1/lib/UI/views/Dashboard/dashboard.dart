@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wildfire1/model/wildfire_model.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _DashboardScreenState createState() => _DashboardScreenState();
 }
 
 var firestore = FirebaseFirestore.instance.collection("WildfireUpdates");
 
-class _MyHomePageState extends State<MyHomePage> {
-
-@override
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -54,73 +52,82 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          SizedBox(height: 13.h,),
+          SizedBox(
+            height: 13.h,
+          ),
           Container(
             height: 220.h,
             child: StreamBuilder<QuerySnapshot>(
               stream: firestore.snapshots(),
               builder: (context, snapshot) {
-                if(snapshot.hasData){
-                var wildfireUpdates = snapshot.data?.docs.map((e) => WildfireUpdate.fromJson(e)).toList();
-                print("fire ${snapshot.data?.docs[0].data()}");
-                return ListView.builder(
+                if (snapshot.hasData) {
+                  var wildfireUpdates = snapshot.data?.docs
+                      .map((e) => WildfireUpdate.fromJson(e))
+                      .toList();
+                  print("fire ${snapshot.data?.docs[0].data()}");
+                  return ListView.builder(
                     itemCount: wildfireUpdates?.length,
-                  itemBuilder: (BuildContext context, index) {
+                    itemBuilder: (BuildContext context, index) {
                       return Padding(
                         padding: EdgeInsets.only(left: 29.w, right: 42.w),
                         child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset("assets/icons/map-pin.svg"),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text (wildfireUpdates![index].location,
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SvgPicture.asset("assets/icons/map-pin.svg"),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    wildfireUpdates![index].location,
+                                    style: TextStyle(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromRGBO(126, 122, 143, 1)),
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  SvgPicture.asset("assets/icons/ellipse.svg"),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    timeago.format(
+                                        wildfireUpdates[index].when.toDate()),
+                                    style: TextStyle(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromRGBO(126, 122, 143, 1)),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              Text(
+                                wildfireUpdates[index].details,
+                                style: TextStyle(
+                                    fontSize: 13.sp,
                                     fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(126, 122, 143, 1)),),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                SvgPicture.asset("assets/icons/ellipse.svg"),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  wildfireUpdates[index].when.toString(),
-                                  style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(126, 122, 143, 1)),
-                                ),],),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Text(
-                                  wildfireUpdates[index].details,
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
-                                  textAlign: TextAlign.left,
-                                ),
-                                SizedBox(
-                                  height: 11.h,
-                                ),
-                                SvgPicture.asset("assets/icons/line.svg"),
-                                SizedBox(
-                                  height: 13.h,
-                                ),
-
-
-                          ]
-                        ),
+                                    color: Colors.black),
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                height: 11.h,
+                              ),
+                              SvgPicture.asset("assets/icons/line.svg"),
+                              SizedBox(
+                                height: 13.h,
+                              ),
+                            ]),
                       );
-                  },
-
-                );}
+                    },
+                  );
+                }
                 return CircularProgressIndicator();
               },
             ),
@@ -158,10 +165,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.r)
-                  ),
+                      borderRadius: BorderRadius.circular(4.r)),
                   primary: Colors.orange,
-                  side: BorderSide(width: 1.w,
+                  side: BorderSide(
+                    width: 1.w,
                     color: Color.fromRGBO(255, 98, 76, 1),
                   ),
                 ),
@@ -196,9 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             Container(
                               alignment: AlignmentDirectional.center,
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 13.w,
-                                    right: 16.w),
+                                padding:
+                                    EdgeInsets.only(left: 13.w, right: 16.w),
                                 child: Image.asset(
                                   "assets/images/firefighter.png",
                                   width: 385.w,
@@ -210,9 +216,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             Container(
                               alignment: AlignmentDirectional.center,
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 13.w,
-                                    right: 16.w),
+                                padding:
+                                    EdgeInsets.only(left: 13.w, right: 16.w),
                                 child: Image.asset(
                                   "assets/images/darken.png",
                                   width: 385.w,
@@ -265,13 +270,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top:50.h, left: 333.w),
+                              padding: EdgeInsets.only(top: 50.h, left: 333.w),
                               child: Column(
                                 children: [
                                   TextButton(
                                     onPressed: () {},
                                     child: SvgPicture.asset(
-                                        "assets/icons/arrow-right-circle.svg"),
+                                        "assets/icons/arrow-right-circle.svg", height: 20.h, width: 20.w,),
                                   ),
                                   Text(
                                     "More",
@@ -292,16 +297,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: [
                                 Container(
-                                  width:(107.w),
-                                  height:(103.h),
+                                  width: (107.w),
+                                  height: (103.h),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
                                     onPressed: () {},
-                                    child:
-                                        SvgPicture.asset("assets/icons/edit.svg"),
+                                    child: SvgPicture.asset(
+                                        "assets/icons/edit.svg", height: 40.h, width: 40.w,),
                                   ),
                                 ),
                                 SizedBox(
@@ -320,17 +325,18 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: [
                                 Container(
-                                  width:(107.w),
-                                  height:(103.h),
+                                  width: (107.w),
+                                  height: (103.h),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                      onPressed: () {},
-                                      child: SvgPicture.asset(
-                                        "assets/icons/thumbsup.svg",
-                                      ),),
+                                    onPressed: () {},
+                                    child: SvgPicture.asset(
+                                      "assets/icons/thumbsup.svg", height: 40.h, width: 40.19.w,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 15.h,
@@ -348,8 +354,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: [
                                 Container(
-                                  width:(107.w),
-                                  height:(103.h),
+                                  width: (107.w),
+                                  height: (103.h),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(22.r),
@@ -357,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: TextButton(
                                     onPressed: () {},
                                     child: SvgPicture.asset(
-                                        "assets/icons/help-circle.svg"),
+                                        "assets/icons/help-circle.svg", height: 40.h, width: 40.83.w,),
                                   ),
                                 ),
                                 SizedBox(
@@ -387,51 +393,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      /*bottomNavigationBar: BottomNavigationBar(
-        onTap: _onItemTapped,
-        backgroundColor: Colors.transparent,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        selectedLabelStyle: TextStyle(fontSize: 10.sp),
-        selectedItemColor: Color.fromRGBO(255, 98, 77, 1),
-        unselectedLabelStyle: TextStyle(fontSize: 10.sp),
-        unselectedItemColor: Color.fromRGBO(195, 199, 210, 1),
-        currentIndex: _currentSelected,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/menu.svg", color: _currentSelected == 0? orange : grey),
-            ),
-            label: "Menu",
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/home.svg", color: _currentSelected == 0? orange : grey),
-            ),
-            label: "Dashboard",
-          ),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-thumbs-up.svg", color: _currentSelected == 0? orange : grey),
-              ),
-              label: "Im Alive"),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-bell.svg", color: _currentSelected == 0? orange : grey),
-              ),
-              label: "Updates"),
-          BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-help-circle.svg", color: _currentSelected == 0? orange : grey),
-              ),
-              label: "Ask"),
-        ],
-      ),*/
     );
   }
 }
