@@ -56,7 +56,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             height: 13.h,
           ),
           Container(
-            height: 220.h,
+            height: 230.h,
             child: StreamBuilder<QuerySnapshot>(
               stream: firestore.snapshots(),
               builder: (context, snapshot) {
@@ -183,7 +183,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    height: 382.h,
+                    height: 400.h,
                     width: 414.w,
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(8, 146, 133, 1),
@@ -270,21 +270,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 50.h, left: 333.w),
+                              padding: EdgeInsets.only(top: 60.h, left: 340.w),
                               child: Column(
                                 children: [
                                   TextButton(
                                     onPressed: () {},
-                                    child: SvgPicture.asset(
-                                        "assets/icons/arrow-right-circle.svg", height: 20.h, width: 20.w,),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SvgPicture.asset(
+                                            "assets/icons/arrow-right-circle.svg", height: 23.h, width: 23.w,),
+                                        SizedBox(height: 2.h,),
+                                        Text(
+                                          "More",
+                                          style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white),
+                                        ),],
+                                    ),
                                   ),
-                                  Text(
-                                    "More",
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white),
-                                  ),
+
                                 ],
                               ),
                             ),
@@ -306,7 +312,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   child: TextButton(
                                     onPressed: () {},
                                     child: SvgPicture.asset(
-                                        "assets/icons/edit.svg", height: 40.h, width: 40.w,),
+                                        "assets/icons/edit.svg", height: 46.h, width: 46.w,),
                                   ),
                                 ),
                                 SizedBox(
@@ -334,7 +340,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   child: TextButton(
                                     onPressed: () {},
                                     child: SvgPicture.asset(
-                                      "assets/icons/thumbsup.svg", height: 40.h, width: 40.19.w,
+                                      "assets/icons/thumbsup.svg", height: 46.h, width: 46.w,
                                     ),
                                   ),
                                 ),
@@ -363,7 +369,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   child: TextButton(
                                     onPressed: () {},
                                     child: SvgPicture.asset(
-                                        "assets/icons/help-circle.svg", height: 40.h, width: 40.83.w,),
+                                        "assets/icons/help-circle.svg", height: 46.h, width: 46.w,),
                                   ),
                                 ),
                                 SizedBox(

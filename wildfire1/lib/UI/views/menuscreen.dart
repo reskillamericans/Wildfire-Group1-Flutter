@@ -80,7 +80,7 @@ class _MenuScreenState extends State<MenuScreen> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/menu.svg", height: 20.h, width: 20.w,
+              child: SvgPicture.asset("assets/icons/menu.svg", height: 24.h, width: 24.w,
                   color: _currentSelected == 0
                       ? Color.fromRGBO(255, 98, 77, 1)
                       : Color.fromRGBO(195, 199, 210, 1), ),
@@ -90,7 +90,7 @@ class _MenuScreenState extends State<MenuScreen> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 8.h),
-              child: SvgPicture.asset("assets/icons/home.svg", height: 20.h, width: 20.w,
+              child: SvgPicture.asset("assets/icons/home.svg", height: 24.h, width: 24.w,
                   color: _currentSelected == 1
                       ? Color.fromRGBO(255, 98, 77, 1)
                       : Color.fromRGBO(195, 199, 210, 1)),
@@ -100,7 +100,7 @@ class _MenuScreenState extends State<MenuScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-thumbs-up.svg", height: 20.h, width: 20.w,
+                child: SvgPicture.asset("assets/icons/tiny-thumbs-up.svg", height: 24.h, width: 24.w,
                     color: _currentSelected == 2
                         ? Color.fromRGBO(255, 98, 77, 1)
                         : Color.fromRGBO(195, 199, 210, 1)),
@@ -109,7 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-bell.svg", height: 20.h, width: 20.w,
+                child: SvgPicture.asset("assets/icons/tiny-bell.svg", height: 24.h, width: 24.w,
                     color: _currentSelected == 3
                         ? Color.fromRGBO(255, 98, 77, 1)
                         : Color.fromRGBO(195, 199, 210, 1)),
@@ -118,7 +118,7 @@ class _MenuScreenState extends State<MenuScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.only(bottom: 8.h),
-                child: SvgPicture.asset("assets/icons/tiny-help-circle.svg", height: 20.h, width: 20.w,
+                child: SvgPicture.asset("assets/icons/tiny-help-circle.svg", height: 24.h, width: 24.w,
                     color: _currentSelected == 4
                         ? Color.fromRGBO(255, 98, 77, 1)
                         : Color.fromRGBO(195, 199, 210, 1)),
