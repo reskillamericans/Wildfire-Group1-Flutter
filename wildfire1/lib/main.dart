@@ -1,61 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:wildfire1/utils/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wildfire1/ui/views/menuscreen.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(WildfireApp());
 }
 
-class MyApp extends StatelessWidget {
+
+class WildfireApp extends StatelessWidget {
+  const WildfireApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ScreenUtilInit(
+      builder: () => MaterialApp(
+        title: 'Wildfire Notifications',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: MenuScreen(),
+        debugShowCheckedModeBanner: false,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-       child: imageBackground(Padding(
-         padding: const EdgeInsets.all(32.0),
-         child: SvgPicture.asset("assets/images/vaadin_health-card.svg"),
-       ), context),
-      ),
-    );
-  }
-
-
-  Container imageBackground(Widget child,BuildContext context){
-    return Container(
-      child: child,
-      height: 200,
-      width:200,
-      margin: EdgeInsets.only(right: 5),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color:green,
-      ),
+      designSize: const Size(414, 896),
     );
   }
 }
