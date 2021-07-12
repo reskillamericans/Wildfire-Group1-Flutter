@@ -271,27 +271,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 60.h, left: 340.w),
-                              child: Column(
-                                children: [
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/icons/arrow-right-circle.svg", height: 23.h, width: 23.w,),
-                                        SizedBox(height: 2.h,),
-                                        Text(
-                                          "More",
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
-                                        ),],
-                                    ),
-                                  ),
-
-                                ],
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                        "assets/icons/arrow-right-circle.svg", height: 23.h, width: 23.w,),
+                                    SizedBox(height: 2.h,),
+                                    Text(
+                                      "More",
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
+                                    ),],
+                                ),
                               ),
                             ),
                           ],
