@@ -11,6 +11,7 @@ void main() async {
   runApp(WildfireApp());
 }
 
+
 class WildfireApp extends StatelessWidget {
   const WildfireApp({Key? key}) : super(key: key);
   @override
