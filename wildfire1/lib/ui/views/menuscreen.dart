@@ -65,6 +65,7 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
           )),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(249, 249, 249, 0.94),
         onTap: _onItemTapped,
         showSelectedLabels: true,
         showUnselectedLabels: true,
