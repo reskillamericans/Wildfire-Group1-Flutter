@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wildfire1/ui/views/alivescreen.dart';
 import 'package:wildfire1/ui/views/askscreen.dart';
 import 'package:wildfire1/ui/views/dashboard/dashboard.dart';
+import 'package:wildfire1/ui/views/reportafire.dart';
 import 'package:wildfire1/ui/views/updatesscreen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,8 +21,8 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     bottomPages = [
-      DashboardScreen(),
-      DashboardScreen(),
+      DashboardScreen(viewAllUpdatesTap: (){_onItemTapped(3);}, askAnythingTap: (){_onItemTapped(4);}, imAliveTap: (){_onItemTapped(2);},),
+      DashboardScreen(viewAllUpdatesTap: (){_onItemTapped(3);}, askAnythingTap: (){_onItemTapped(4);}, imAliveTap: (){_onItemTapped(2);},),
       AliveScreen(),
       UpdatesScreen(),
       AskScreen(),

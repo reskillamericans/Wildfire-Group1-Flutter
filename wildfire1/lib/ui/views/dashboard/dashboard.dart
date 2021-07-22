@@ -5,8 +5,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wildfire1/model/wildfire_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:wildfire1/ui/views/reportafire.dart';
+
 
 class DashboardScreen extends StatefulWidget {
+  DashboardScreen(
+      {required this.viewAllUpdatesTap,
+      required this.askAnythingTap,
+      required this.imAliveTap});
+
+  Function viewAllUpdatesTap;
+  Function askAnythingTap;
+  Function imAliveTap;
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -141,7 +151,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               width: 377.w,
               height: 40.h,
               child: OutlinedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  widget.viewAllUpdatesTap();
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -277,15 +289,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SvgPicture.asset(
-                                        "assets/icons/arrow-right-circle.svg", height: 23.h, width: 23.w,),
-                                    SizedBox(height: 2.h,),
+                                      "assets/icons/arrow-right-circle.svg",
+                                      height: 23.h,
+                                      width: 23.w,
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
                                     Text(
                                       "More",
                                       style: TextStyle(
                                           fontSize: 13.sp,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
-                                    ),],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -305,9 +323,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => FireReport(),),
+                                    );
+                                    },
                                     child: SvgPicture.asset(
-                                        "assets/icons/edit.svg", height: 46.h, width: 46.w,),
+                                      "assets/icons/edit.svg",
+                                      height: 46.h,
+                                      width: 46.w,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -333,9 +358,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      widget.imAliveTap();
+                                    },
                                     child: SvgPicture.asset(
-                                      "assets/icons/thumbsup.svg", height: 46.h, width: 46.w,
+                                      "assets/icons/thumbsup.svg",
+                                      height: 46.h,
+                                      width: 46.w,
                                     ),
                                   ),
                                 ),
@@ -362,9 +391,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      widget.askAnythingTap();
+                                    },
                                     child: SvgPicture.asset(
-                                        "assets/icons/help-circle.svg", height: 46.h, width: 46.w,),
+                                      "assets/icons/help-circle.svg",
+                                      height: 46.h,
+                                      width: 46.w,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(

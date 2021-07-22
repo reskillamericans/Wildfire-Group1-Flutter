@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wildfire1/model/wildfire_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:wildfire1/ui/views/searchbar.dart';
+import 'package:wildfire1/ui/views/reportafire.dart';
+
 
 class UpdatesScreen extends StatefulWidget {
   @override
@@ -33,15 +35,15 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         ),
         backgroundColor: Colors.white,
       ),
-      body:
-      Column(
+      body: Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: 16.w, left: 16.w, right: 16.w),
             child: Container(
               height: 38.h,
-              width:double.infinity,
-              child: SearchBar(),),
+              width: double.infinity,
+              child: SearchBar(),
+            ),
           ),
           Expanded(
             child: Padding(
@@ -83,9 +85,11 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                       Text(
                                         wildfireUpdates![index].location,
                                         style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color.fromRGBO(126, 122, 143, 1),),
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color:
+                                              Color.fromRGBO(126, 122, 143, 1),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 5.w,
@@ -97,12 +101,15 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        timeago.format(
-                                            wildfireUpdates[index].when.toDate()),
+                                        timeago.format(wildfireUpdates[index]
+                                            .when
+                                            .toDate()),
                                         style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color.fromRGBO(126, 122, 143, 1),),
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color:
+                                              Color.fromRGBO(126, 122, 143, 1),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -111,7 +118,8 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                   height: 8.h,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 32.w, right: 15.w),
+                                  padding:
+                                      EdgeInsets.only(left: 32.w, right: 15.w),
                                   child: Text(
                                     wildfireUpdates[index].details,
                                     style: TextStyle(
@@ -145,20 +153,31 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         height: 39.h,
         width: 145.w,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FireReport(),),
+            );
+          },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           child: Padding(
-            padding: EdgeInsets.only(left: 15.w, right: 19.w, top: 8.h, bottom: 8.h),
+            padding:
+                EdgeInsets.only(left: 15.w, right: 19.w, top: 8.h, bottom: 8.h),
             child: Row(
               children: [
-                Image.asset("assets/icons/flame.png", height: 22.5.h, width: 17.64.w,),
+                Image.asset(
+                  "assets/icons/flame.png",
+                  height: 22.5.h,
+                  width: 17.64.w,
+                ),
                 SizedBox(
                   width: 7.w,
                 ),
                 Text(
                   "Add Incident",
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w700, fontSize: 13.sp),
                 )
               ],
             ),
@@ -166,8 +185,6 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           backgroundColor: Color.fromRGBO(8, 146, 133, 1),
         ),
       ),
-
-
     );
   }
 }

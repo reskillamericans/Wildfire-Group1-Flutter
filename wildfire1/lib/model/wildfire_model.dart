@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
+
 class WildfireUpdate {
   String firstName;
   String lastName;
