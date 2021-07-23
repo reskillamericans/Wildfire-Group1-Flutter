@@ -7,7 +7,6 @@ import 'package:wildfire1/model/wildfire_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:wildfire1/ui/views/reportafire.dart';
 
-
 class DashboardScreen extends StatefulWidget {
   DashboardScreen(
       {required this.viewAllUpdatesTap,
@@ -323,10 +322,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => FireReport(),),
-                                    );
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FireReport(),
+                                        ),
+                                      );
                                     },
                                     child: SvgPicture.asset(
                                       "assets/icons/edit.svg",

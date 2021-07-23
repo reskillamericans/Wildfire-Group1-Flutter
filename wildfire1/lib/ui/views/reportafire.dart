@@ -21,6 +21,12 @@ class _FireReportState extends State<FireReport> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
+  final FocusNode _firstNameFocus = FocusNode();
+  final FocusNode _lastNameFocus = FocusNode();
+  final FocusNode _phoneNumberFocus = FocusNode();
+  final FocusNode _locationFocus = FocusNode();
+  final FocusNode _detailsFocus = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -98,11 +104,19 @@ class _FireReportState extends State<FireReport> {
                                     }
                                     return null;
                                   },
+                                  style: TextStyle(fontSize: 13.sp),
                                   controller: firstNameController,
+                                  textInputAction: TextInputAction.next,
+                                  focusNode: _firstNameFocus,
+                                  onFieldSubmitted: (value) {
+                                    _fieldFocusChange(context, _firstNameFocus,
+                                        _lastNameFocus);
+                                  },
                                   textAlignVertical: TextAlignVertical.center,
                                   decoration: InputDecoration(
                                     errorStyle: TextStyle(
-                                        height: 0.2.h,
+                                        fontSize: 10.sp,
+                                        height: 0.15.h,
                                         color: Color.fromRGBO(139, 0, 0, 1)),
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 10.w, vertical: 5.h),
@@ -157,11 +171,19 @@ class _FireReportState extends State<FireReport> {
                               }
                               return null;
                             },
+                            style: TextStyle(fontSize: 13.sp),
+                            textInputAction: TextInputAction.next,
+                            focusNode: _lastNameFocus,
+                            onFieldSubmitted: (value) {
+                              _fieldFocusChange(
+                                  context, _lastNameFocus, _phoneNumberFocus);
+                            },
                             controller: lastNameController,
                             textAlignVertical: TextAlignVertical.center,
                             decoration: InputDecoration(
                               errorStyle: TextStyle(
-                                  height: 0.2.h,
+                                  fontSize: 10.sp,
+                                  height: 0.15.h,
                                   color: Color.fromRGBO(139, 0, 0, 1)),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 5.h),
@@ -213,11 +235,20 @@ class _FireReportState extends State<FireReport> {
                               }
                               return null;
                             },
+                            style: TextStyle(fontSize: 13.sp),
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            focusNode: _phoneNumberFocus,
+                            onFieldSubmitted: (value) {
+                              _fieldFocusChange(
+                                  context, _phoneNumberFocus, _locationFocus);
+                            },
                             controller: phoneNumberController,
                             textAlignVertical: TextAlignVertical.center,
                             decoration: InputDecoration(
                               errorStyle: TextStyle(
-                                  height: 0.2.h,
+                                  fontSize: 10.sp,
+                                  height: 0.15.h,
                                   color: Color.fromRGBO(139, 0, 0, 1)),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 5.h),
@@ -269,11 +300,19 @@ class _FireReportState extends State<FireReport> {
                               }
                               return null;
                             },
+                            style: TextStyle(fontSize: 13.sp),
+                            textInputAction: TextInputAction.next,
+                            focusNode: _locationFocus,
+                            onFieldSubmitted: (value) {
+                              _fieldFocusChange(
+                                  context, _locationFocus, _detailsFocus);
+                            },
                             controller: locationController,
                             textAlignVertical: TextAlignVertical.center,
                             decoration: InputDecoration(
                               errorStyle: TextStyle(
-                                  height: 0.2.h,
+                                  fontSize: 10.sp,
+                                  height: 0.15.h,
                                   color: Color.fromRGBO(139, 0, 0, 1)),
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 5.h),
@@ -328,48 +367,61 @@ class _FireReportState extends State<FireReport> {
                         SizedBox(
                           height: 6.h,
                         ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter incident details';
-                            }
-                            return null;
-                          },
-                          controller: detailsController,
-                          textAlignVertical: TextAlignVertical.top,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 2,
-                          maxLength: 200,
-                          decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                height: 0.1.h,
-                                color: Color.fromRGBO(139, 0, 0, 1)),
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 10.w),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent, width: 0),
+                        Container(
+                          height: 93.h,
+                          child: Expanded(
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter incident details';
+                                }
+                                return null;
+                              },
+                              style: TextStyle(fontSize: 13.sp),
+                              textInputAction: TextInputAction.done,
+                              focusNode: _detailsFocus,
+                              onFieldSubmitted: (value) {
+                                _detailsFocus.unfocus();
+                              },
+                              controller: detailsController,
+                              textAlignVertical: TextAlignVertical.top,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: 2,
+                              maxLength: 200,
+                              decoration: InputDecoration(
+                                counter: Offstage(),
+                                errorStyle: TextStyle(
+                                    fontSize: 10.sp,
+                                    height: 0.15.h,
+                                    color: Color.fromRGBO(139, 0, 0, 1)),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 15.h, horizontal: 10.w),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderSide: BorderSide(
+                                      color: Colors.transparent, width: 0),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderSide: BorderSide(
+                                      color: Colors.transparent, width: 0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(139, 0, 0, 1),
+                                      width: 1),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(139, 0, 0, 1),
+                                      width: 0),
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              borderSide: BorderSide(
-                                  color: Colors.transparent, width: 0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(139, 0, 0, 1),
-                                  width: 1),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4.r),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(139, 0, 0, 1),
-                                  width: 0),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
                           ),
                         ),
                         SizedBox(
@@ -484,7 +536,6 @@ class _FireReportState extends State<FireReport> {
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
                               }
-                              ;
                             },
                             child: Text(
                               "Submit",
@@ -539,4 +590,10 @@ class _FireReportState extends State<FireReport> {
       ),
     );
   }
+}
+
+_fieldFocusChange(
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  currentFocus.unfocus();
+  FocusScope.of(context).requestFocus(nextFocus);
 }
