@@ -68,7 +68,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Container(
             height: 230.h,
             child: StreamBuilder<QuerySnapshot>(
-              stream: firestore.snapshots(),
+              stream: firestore.orderBy("when", descending: true).snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var wildfireUpdates = snapshot.data?.docs

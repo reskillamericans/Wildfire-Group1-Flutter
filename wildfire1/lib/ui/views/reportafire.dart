@@ -71,210 +71,100 @@ class _FireReportState extends State<FireReport> {
                   height: 745.h,
                   child: Padding(
                     padding: EdgeInsets.only(left: 25.w, right: 27.w),
-                    child: Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 28.h,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 28.h,
+                        ),
+                        Text(
+                          "First Name",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
                           ),
-                          Text(
-                            "First Name",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 40.h,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your first name';
-                                }
-                                return null;
-                              },
-                              controller: firstNameController,
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.h),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 40.h,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter your first name';
+                                    }
+                                    return null;
+                                  },
+                                  controller: firstNameController,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  decoration: InputDecoration(
+                                    errorStyle: TextStyle(
+                                        height: 0.2.h,
+                                        color: Color.fromRGBO(139, 0, 0, 1)),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10.w, vertical: 5.h),
+                                    border: OutlineInputBorder(
+                                      // borderRadius: BorderRadius.circular(4.r),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent, width: 0),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      // borderRadius: BorderRadius.circular(4.r),
+                                      borderSide: BorderSide(
+                                          color: Colors.transparent, width: 0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      borderSide: BorderSide(
+                                          color: Color.fromRGBO(139, 0, 0, 1),
+                                          width: 1),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      borderSide: BorderSide(
+                                          color: Color.fromRGBO(139, 0, 0, 1),
+                                          width: 0),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                  ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
                               ),
-                            ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 8.h,
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "Last Name",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
                           ),
-                          Text(
-                            "Last Name",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 40.h,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your last name';
-                                }
-                                return null;
-                              },
-                              controller: lastNameController,
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.h),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Text(
-                            "Phone Number",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 40.h,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your phone number';
-                                }
-                                return null;
-                              },
-                              controller: phoneNumberController,
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.h),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Text(
-                            "Location",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 40.h,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your location';
-                                }
-                                return null;
-                              },
-                              controller: locationController,
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.h),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  borderSide: BorderSide(
-                                      color: Colors.transparent, width: 0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Text(
-                            "Incident Details",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            "max 200 characters",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(126, 122, 143, 1),
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(
-                            height: 6.h,
-                          ),
-                          TextFormField(
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 40.h,
+                          child: TextFormField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter incident details';
+                                return 'Please enter your last name';
                               }
                               return null;
                             },
-                            controller: detailsController,
-                            textAlignVertical: TextAlignVertical.top,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 2,
-                            maxLength: 200,
+                            controller: lastNameController,
+                            textAlignVertical: TextAlignVertical.center,
                             decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  height: 0.2.h,
+                                  color: Color.fromRGBO(139, 0, 0, 1)),
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 20.h, horizontal: 10.w),
+                                  horizontal: 10.w, vertical: 5.h),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4.r),
                                 borderSide: BorderSide(
@@ -285,108 +175,299 @@ class _FireReportState extends State<FireReport> {
                                 borderSide: BorderSide(
                                     color: Colors.transparent, width: 0),
                               ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 1),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 0),
+                              ),
                               filled: true,
                               fillColor: Colors.white,
                             ),
                           ),
-                          SizedBox(
-                            height: 8.h,
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "Phone Number",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
                           ),
-                          Text(
-                            "Add Photo",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            "Adding photos and videos is optional.",
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.italic,
-                              color: Color.fromRGBO(126, 122, 143, 1),
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            width: 148.w,
-                            height: 127.h,
-                            child: OutlinedButton(
-                              onPressed: () {},
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 33.h,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: SvgPicture.asset(
-                                      "assets/icons/camera.svg",
-                                      width: 24.w,
-                                      height: 20.h,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 7.h,
-                                  ),
-                                  Text(
-                                    "Upload",
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color.fromRGBO(255, 98, 76, 1)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(
-                                    height: 3.h,
-                                  ),
-                                  Text(
-                                    "Take a photo or select existing picture from your gallery",
-                                    style: TextStyle(
-                                        fontSize: 9.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Color.fromRGBO(126, 122, 143, 1)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(
-                                    height: 24.h,
-                                  ),
-                                ],
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 40.h,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your phone number';
+                              }
+                              return null;
+                            },
+                            controller: phoneNumberController,
+                            textAlignVertical: TextAlignVertical.center,
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  height: 0.2.h,
+                                  color: Color.fromRGBO(139, 0, 0, 1)),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 5.h),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
                               ),
-                              style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.r)),
-                                  side: BorderSide(
-                                      width: 1.w,
-                                      color: Color.fromRGBO(255, 98, 76, 1))),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 1),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 0),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
                           ),
-                          SizedBox(
-                            height: 33.h,
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "Location",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
                           ),
-                          Container(
-                            width: 362.w,
-                            height: 40.h,
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 98, 77, 1),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 40.h,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your location';
+                              }
+                              return null;
+                            },
+                            controller: locationController,
+                            textAlignVertical: TextAlignVertical.center,
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  height: 0.2.h,
+                                  color: Color.fromRGBO(139, 0, 0, 1)),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 5.h),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Colors.transparent, width: 0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 1),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4.r),
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(139, 0, 0, 1),
+                                    width: 0),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "Incident Details",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          "max 200 characters",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromRGBO(126, 122, 143, 1),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter incident details';
+                            }
+                            return null;
+                          },
+                          controller: detailsController,
+                          textAlignVertical: TextAlignVertical.top,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 2,
+                          maxLength: 200,
+                          decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                                height: 0.1.h,
+                                color: Color.fromRGBO(139, 0, 0, 1)),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 10.w),
+                            border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4.r),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 0),
                             ),
-                            child: TextButton(
-                              onPressed: () async {
-                                // if (_formKey.currentState!.validate()) {
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.r),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.r),
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(139, 0, 0, 1),
+                                  width: 1),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4.r),
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(139, 0, 0, 1),
+                                  width: 0),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "Add Photo",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          "Adding photos and videos is optional.",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.italic,
+                            color: Color.fromRGBO(126, 122, 143, 1),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          width: 148.w,
+                          height: 127.h,
+                          child: OutlinedButton(
+                            onPressed: () {},
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  height: 33.h,
+                                ),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: SvgPicture.asset(
+                                    "assets/icons/camera.svg",
+                                    width: 24.w,
+                                    height: 20.h,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 7.h,
+                                ),
+                                Text(
+                                  "Upload",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromRGBO(255, 98, 76, 1)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 3.h,
+                                ),
+                                Text(
+                                  "Take a photo or select existing picture from your gallery",
+                                  style: TextStyle(
+                                      fontSize: 9.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromRGBO(126, 122, 143, 1)),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(
+                                  height: 24.h,
+                                ),
+                              ],
+                            ),
+                            style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.r)),
+                                side: BorderSide(
+                                    width: 1.w,
+                                    color: Color.fromRGBO(255, 98, 76, 1))),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 33.h,
+                        ),
+                        Container(
+                          width: 362.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(255, 98, 77, 1),
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: TextButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
                                 CollectionReference WildfireUpdates =
                                     FirebaseFirestore.instance
                                         .collection("WildfireUpdates");
@@ -398,54 +479,56 @@ class _FireReportState extends State<FireReport> {
                                   "details": detailsController.text,
                                   "when": timestamp
                                 });
+                                // if (_formKey.currentState!.validate()){}
 
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
-                              },
-                              child: Text(
-                                "Submit",
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
+                              }
+                              ;
+                            },
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(
-                            height: 25.h,
+                        ),
+                        SizedBox(
+                          height: 25.h,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4.r),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4.r),
+                          width: 362.w,
+                          height: 40.h,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(255, 98, 76, 1)),
+                              textAlign: TextAlign.center,
                             ),
-                            width: 362.w,
-                            height: 40.h,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
-                              },
-                              child: Text(
-                                "Cancel",
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color.fromRGBO(255, 98, 76, 1)),
-                                textAlign: TextAlign.center,
-                              ),
-                              style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.r)),
-                                  primary: Colors.white,
-                                  side: BorderSide(
-                                      width: 1.w,
-                                      color: Color.fromRGBO(255, 98, 76, 1))),
-                            ),
+                            style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4.r)),
+                                primary: Colors.white,
+                                side: BorderSide(
+                                    width: 1.w,
+                                    color: Color.fromRGBO(255, 98, 76, 1))),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
