@@ -137,7 +137,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     },
                   );
                 }
-                return CircularProgressIndicator();
+                return Center(
+                    child: Container(
+                        height: 10.h,
+                        width: 10.w,
+                        child: CircularProgressIndicator()));
               },
             ),
           ),

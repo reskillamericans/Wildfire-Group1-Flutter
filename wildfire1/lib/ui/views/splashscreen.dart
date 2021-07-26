@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:wildfire1/ui/views/onboarding.dart';
 
@@ -13,8 +12,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  void open()async{
+  void open() async {
     await Hive.openBox("onboarding");
   }
 
@@ -22,16 +20,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 2), box.get("status") == "true" ? elseroute : route);
+    Timer(
+        Duration(seconds: 2), box.get("status") == "true" ? elseroute : route);
     super.initState();
   }
 
   route() {
-    Navigator.pushReplacement<void, void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => OnBoarding(),),);
+    Navigator.pushReplacement<void, void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => OnBoarding(),
+      ),
+    );
   }
 
-  elseroute(){
-    Navigator.pushReplacement<void, void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => MenuScreen(),),);
+  elseroute() {
+    Navigator.pushReplacement<void, void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => MenuScreen(),
+      ),
+    );
   }
 
   @override
@@ -42,9 +51,15 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 352.h),
-            child: SvgPicture.asset("assets/icons/firelogo.svg", height: 50.h, width: 109.w,),
+            child: SvgPicture.asset(
+              "assets/icons/firelogo.svg",
+              height: 50.h,
+              width: 109.w,
+            ),
           ),
-          SizedBox(height: 12.h,),
+          SizedBox(
+            height: 12.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -52,7 +67,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 'WILDFIRE',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                    color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w800),
+                    color: Colors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w800),
               ),
             ],
           ),

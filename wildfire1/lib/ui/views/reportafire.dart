@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:wildfire1/model/cloudresult.dart';
 import 'package:wildfire1/logic/cloudstorage.dart';
@@ -17,6 +16,8 @@ class FireReport extends StatefulWidget {
 }
 
 var timestamp = new DateTime.now();
+CloudStorageResult? uploadResult;
+
 
 class _FireReportState extends State<FireReport> {
   TextEditingController detailsController = TextEditingController();
@@ -34,6 +35,8 @@ class _FireReportState extends State<FireReport> {
   final _formKey = GlobalKey<FormState>();
 
   CloudUpload upload = CloudUpload();
+
+
 
   File? pickedImage;
 
@@ -540,8 +543,9 @@ class _FireReportState extends State<FireReport> {
                           child: TextButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                final uploadResult =
-                                    await upload.imageUpload(pickedImage);
+                                if (pickedImage!=null){
+                                uploadResult =
+                                await upload.imageUpload(pickedImage);}
                                 CollectionReference WildfireUpdates =
                                     FirebaseFirestore.instance
                                         .collection("WildfireUpdates");
@@ -552,8 +556,8 @@ class _FireReportState extends State<FireReport> {
                                   "location": locationController.text,
                                   "details": detailsController.text,
                                   "when": timestamp,
-                                  "imageName": uploadResult.imageName,
-                                  "imageUrl": uploadResult.imageUrl,
+                                  "imageName": uploadResult?.imageName,
+                                  "imageUrl": uploadResult?.imageUrl,
                                 });
                                 // if (_formKey.currentState!.validate()){}
                                 Navigator.of(context)

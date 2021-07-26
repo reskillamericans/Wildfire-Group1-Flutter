@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -149,26 +148,29 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                         top: 10.h, bottom: 10.h, left: 15.w),
                                     child: Container(
                                         width: 80.w,
-                                        child: wildfireUpdates[index]
-                                                .imageUrl!
-                                                .isEmpty
-                                            ? FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                child: SvgPicture.asset(
-                                                  "assets/icons/firelogo.svg",
-                                                  color: Colors.white,
-                                                  height: 10.h,
-                                                  width: 10.w,
-                                                ))
-                                            : FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                child: Image.network(
-                                                  wildfireUpdates[index]
-                                                      .imageUrl!,
-                                                  height: 80.h,
-                                                  width: 80.w,
-                                                ),
-                                              )),
+                                        child:
+                                            wildfireUpdates[index].imageUrl ==
+                                                        null ||
+                                                    wildfireUpdates[index]
+                                                        .imageUrl!
+                                                        .isEmpty
+                                                ? FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: SvgPicture.asset(
+                                                      "assets/icons/firelogo.svg",
+                                                      color: Colors.white,
+                                                      height: 10.h,
+                                                      width: 10.w,
+                                                    ))
+                                                : FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Image.network(
+                                                      wildfireUpdates[index]
+                                                          .imageUrl!,
+                                                      height: 80.h,
+                                                      width: 80.w,
+                                                    ),
+                                                  )),
                                   ),
                                 ],
                               ),
@@ -182,7 +184,11 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                         },
                       );
                     }
-                    return CircularProgressIndicator();
+                    return Center(
+                        child: Container(
+                            height: 10.h,
+                            width: 10.w,
+                            child: CircularProgressIndicator()));
                   },
                 ),
               ),
