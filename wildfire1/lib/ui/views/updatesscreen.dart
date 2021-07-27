@@ -7,7 +7,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:wildfire1/ui/views/searchbar.dart';
 import 'package:wildfire1/ui/views/reportafire.dart';
 
-
 class UpdatesScreen extends StatefulWidget {
   @override
   _UpdatesScreenState createState() => _UpdatesScreenState();
@@ -56,7 +55,8 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                       topLeft: Radius.circular(11.r)),
                 ),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: firestore.snapshots(),
+                  stream:
+                      firestore.orderBy("when", descending: true).snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       var wildfireUpdates = snapshot.data?.docs
@@ -67,81 +67,128 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                         itemCount: wildfireUpdates?.length,
                         itemBuilder: (BuildContext context, index) {
                           return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 13.h,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 32.w),
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        "assets/icons/map-pin.svg",
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        wildfireUpdates![index].location,
-                                        style: TextStyle(
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color:
-                                              Color.fromRGBO(126, 122, 143, 1),
+                            children: [
+                              Divider(
+                                height: 1.h,
+                                color: Color.fromRGBO(229, 229, 229, 1),
+                              ),
+                              Row(
+                                children: [
+                                  Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 32.w,
+                                              top: 13.h,
+                                              bottom: 8.h),
+                                          child: Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                "assets/icons/map-pin.svg",
+                                              ),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              Text(
+                                                wildfireUpdates![index]
+                                                    .location,
+                                                style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color.fromRGBO(
+                                                      126, 122, 143, 1),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              SvgPicture.asset(
+                                                "assets/icons/ellipse.svg",
+                                              ),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              Text(
+                                                timeago.format(
+                                                    wildfireUpdates[index]
+                                                        .when
+                                                        .toDate()),
+                                                style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color.fromRGBO(
+                                                      126, 122, 143, 1),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      SvgPicture.asset(
-                                        "assets/icons/ellipse.svg",
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        timeago.format(wildfireUpdates[index]
-                                            .when
-                                            .toDate()),
-                                        style: TextStyle(
-                                          fontSize: 10.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color:
-                                              Color.fromRGBO(126, 122, 143, 1),
+                                        Container(
+                                          width: 287.w,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 32.w, bottom: 15.h),
+                                            child: Flexible(
+                                              child: Text(
+                                                wildfireUpdates[index].details,
+                                                style: TextStyle(
+                                                    fontSize: 13.sp,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.black),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ]),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 10.h, bottom: 10.h, left: 15.w),
+                                    child: Container(
+                                        width: 80.w,
+                                        child:
+                                            wildfireUpdates[index].imageUrl ==
+                                                        null ||
+                                                    wildfireUpdates[index]
+                                                        .imageUrl!
+                                                        .isEmpty
+                                                ? FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: SvgPicture.asset(
+                                                      "assets/icons/firelogo.svg",
+                                                      color: Colors.white,
+                                                      height: 10.h,
+                                                      width: 10.w,
+                                                    ))
+                                                : FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Image.network(
+                                                      wildfireUpdates[index]
+                                                          .imageUrl!,
+                                                      height: 80.h,
+                                                      width: 80.w,
+                                                    ),
+                                                  )),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 32.w, right: 15.w),
-                                  child: Text(
-                                    wildfireUpdates[index].details,
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15.h,
-                                ),
-                                /*SvgPicture.asset("assets/icons/line.svg"),*/
-                                Divider(
-                                  height: 1.h,
-                                  color: Color.fromRGBO(229, 229, 229, 1),
-                                ),
-                              ]);
+                                ],
+                              ),
+                              // SizedBox(height: 15.h),
+                              Divider(
+                                height: 1.h,
+                                color: Color.fromRGBO(229, 229, 229, 1),
+                              ),
+                            ],
+                          );
                         },
                       );
                     }
-                    return CircularProgressIndicator();
+                    return Center(
+                        child: Container(
+                            height: 10.h,
+                            width: 10.w,
+                            child: CircularProgressIndicator()));
                   },
                 ),
               ),
@@ -156,7 +203,9 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FireReport(),),
+              MaterialPageRoute(
+                builder: (context) => FireReport(),
+              ),
             );
           },
           shape:

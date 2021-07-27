@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:wildfire1/model/cloudresult.dart';
+import 'package:wildfire1/logic/cloudstorage.dart';
 
 class FireReport extends StatefulWidget {
   const FireReport({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class FireReport extends StatefulWidget {
 }
 
 var timestamp = new DateTime.now();
+CloudStorageResult? uploadResult;
+
 
 class _FireReportState extends State<FireReport> {
   TextEditingController detailsController = TextEditingController();
@@ -28,6 +33,12 @@ class _FireReportState extends State<FireReport> {
   final FocusNode _detailsFocus = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
+
+  CloudUpload upload = CloudUpload();
+
+
+
+  File? pickedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -456,56 +467,68 @@ class _FireReportState extends State<FireReport> {
                           ),
                           width: 148.w,
                           height: 127.h,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  height: 33.h,
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: SvgPicture.asset(
-                                    "assets/icons/camera.svg",
-                                    width: 24.w,
-                                    height: 20.h,
+                          child: pickedImage == null
+                              ? OutlinedButton(
+                                  onPressed: () async {
+                                    final image = await selectImage();
+                                    setState(() {
+                                      pickedImage = image;
+                                    });
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        height: 33.h,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: SvgPicture.asset(
+                                          "assets/icons/camera.svg",
+                                          width: 24.w,
+                                          height: 20.h,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 7.h,
+                                      ),
+                                      Text(
+                                        "Upload",
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w700,
+                                            color:
+                                                Color.fromRGBO(255, 98, 76, 1)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(
+                                        height: 3.h,
+                                      ),
+                                      Text(
+                                        "Take a photo or select existing picture from your gallery",
+                                        style: TextStyle(
+                                            fontSize: 9.sp,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color.fromRGBO(
+                                                126, 122, 143, 1)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(
+                                        height: 24.h,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 7.h,
-                                ),
-                                Text(
-                                  "Upload",
-                                  style: TextStyle(
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color.fromRGBO(255, 98, 76, 1)),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(
-                                  height: 3.h,
-                                ),
-                                Text(
-                                  "Take a photo or select existing picture from your gallery",
-                                  style: TextStyle(
-                                      fontSize: 9.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color.fromRGBO(126, 122, 143, 1)),
-                                  textAlign: TextAlign.center,
-                                ),
-                                SizedBox(
-                                  height: 24.h,
-                                ),
-                              ],
-                            ),
-                            style: OutlinedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4.r)),
-                                side: BorderSide(
-                                    width: 1.w,
-                                    color: Color.fromRGBO(255, 98, 76, 1))),
-                          ),
+                                  style: OutlinedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4.r)),
+                                      side: BorderSide(
+                                          width: 1.w,
+                                          color:
+                                              Color.fromRGBO(255, 98, 76, 1))),
+                                )
+                              : Image.file(pickedImage!),
                         ),
                         SizedBox(
                           height: 33.h,
@@ -520,6 +543,9 @@ class _FireReportState extends State<FireReport> {
                           child: TextButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
+                                if (pickedImage!=null){
+                                uploadResult =
+                                await upload.imageUpload(pickedImage);}
                                 CollectionReference WildfireUpdates =
                                     FirebaseFirestore.instance
                                         .collection("WildfireUpdates");
@@ -529,10 +555,11 @@ class _FireReportState extends State<FireReport> {
                                   "phoneNumber": phoneNumberController.text,
                                   "location": locationController.text,
                                   "details": detailsController.text,
-                                  "when": timestamp
+                                  "when": timestamp,
+                                  "imageName": uploadResult?.imageName,
+                                  "imageUrl": uploadResult?.imageUrl,
                                 });
                                 // if (_formKey.currentState!.validate()){}
-
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
                               }
@@ -589,6 +616,14 @@ class _FireReportState extends State<FireReport> {
         ),
       ),
     );
+  }
+
+  Future<File> selectImage() async {
+    final ImagePicker selectImage = ImagePicker();
+    final XFile? selectedImage =
+        await selectImage.pickImage(source: ImageSource.gallery);
+    final path = File(selectedImage!.path);
+    return path;
   }
 }
 
