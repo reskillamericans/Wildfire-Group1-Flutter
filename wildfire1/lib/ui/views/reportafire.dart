@@ -36,8 +36,6 @@ class _FireReportState extends State<FireReport> {
 
   CloudUpload upload = CloudUpload();
 
-
-
   File? pickedImage;
 
   @override
@@ -477,10 +475,10 @@ class _FireReportState extends State<FireReport> {
                                   },
                                   child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.center,
                                     children: [
                                       SizedBox(
-                                        height: 33.h,
+                                        height: 9.h,
                                       ),
                                       Align(
                                         alignment: Alignment.center,
@@ -514,9 +512,7 @@ class _FireReportState extends State<FireReport> {
                                                 126, 122, 143, 1)),
                                         textAlign: TextAlign.center,
                                       ),
-                                      SizedBox(
-                                        height: 24.h,
-                                      ),
+
                                     ],
                                   ),
                                   style: OutlinedButton.styleFrom(
@@ -559,7 +555,6 @@ class _FireReportState extends State<FireReport> {
                                   "imageName": uploadResult?.imageName,
                                   "imageUrl": uploadResult?.imageUrl,
                                 });
-                                // if (_formKey.currentState!.validate()){}
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
                               }

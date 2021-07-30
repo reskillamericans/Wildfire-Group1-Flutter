@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:wildfire1/ui/views/onboarding.dart';
 
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement<void, void>(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => MenuScreen(),
+        builder: (BuildContext context) => LoginScreen(),
       ),
     );
   }
