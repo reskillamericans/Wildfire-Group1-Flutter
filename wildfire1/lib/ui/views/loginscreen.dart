@@ -91,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             style: TextStyle(fontSize: 13.sp),
                             controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             focusNode: emailFocus,
                             onFieldSubmitted: (value) {
@@ -222,15 +223,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          await auth.logIn(
-                              email: emailController.text,
-                              password: passwordController.text);
-
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      MenuScreen()));
+                          await auth
+                              .logIn(
+                                  email: emailController.text,
+                                  password: passwordController.text)
+                              .then((onSuccess) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MenuScreen()));
+                          }).catchError((e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(e.toString()),
+                              ),
+                            );
+                          });
                         }
                       },
                       child: Text(

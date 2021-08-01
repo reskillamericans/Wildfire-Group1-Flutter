@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wildfire1/logic/auth.dart';
 import 'package:wildfire1/model/firebaseuser.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 // final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -31,6 +32,17 @@ final FocusNode _emailFocus = FocusNode();
 final FocusNode _passwordFocus = FocusNode();
 
 final _formKey = GlobalKey<FormState>();
+
+final emailValidator = MultiValidator([
+  RequiredValidator(errorText: 'Please enter your email address'),
+  EmailValidator(errorText: 'Enter a valid email address')
+]);
+
+final passwordValidator = MultiValidator([
+  RequiredValidator(errorText: 'Password is required'),
+  MinLengthValidator(6,
+      errorText: 'Password must be at least 6 characters long'),
+]);
 
 class _SignUpPageState extends State<SignUpPage> {
   Auth auth = Auth();
@@ -262,11 +274,17 @@ class _SignUpPageState extends State<SignUpPage> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your phone number';
+                                  } else if (value.length > 10 ||
+                                      value.length < 10) {
+                                    return 'Please enter your 10-digit phone number';
                                   }
                                   return null;
                                 },
                                 style: TextStyle(fontSize: 13.sp),
                                 keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
                                 textInputAction: TextInputAction.next,
                                 focusNode: _phoneNumberFocus,
                                 onFieldSubmitted: (value) {
@@ -327,13 +345,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             Container(
                               height: 40.h,
                               child: TextFormField(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your email address';
-                                  }
-                                  return null;
-                                },
+                                validator: emailValidator,
                                 style: TextStyle(fontSize: 13.sp),
+                                keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 focusNode: _emailFocus,
                                 onFieldSubmitted: (value) {
@@ -394,12 +408,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             Container(
                               height: 40.h,
                               child: TextFormField(
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a password';
-                                  }
-                                  return null;
-                                },
+                                validator: passwordValidator,
                                 style: TextStyle(fontSize: 13.sp),
                                 obscureText: true,
                                 textInputAction: TextInputAction.done,
@@ -444,18 +453,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                             SizedBox(
-                              height: 2.h,
-                            ),
-                            Text(
-                              "Password requires 6 characters",
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                            SizedBox(
                               height: 115.h,
                             ),
                             Container(
@@ -468,24 +465,35 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: TextButton(
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
-                                    CollectionReference UserUpdate =
-                                        FirebaseFirestore.instance
-                                            .collection("UserUpdate");
-                                    await UserUpdate.add({
-                                      "firstName": firstNameController.text,
-                                      "lastName": lastNameController.text,
-                                      "phoneNumber": phoneNumberController.text,
-                                      "email": emailController.text,
-                                    });
-                                    await auth.signUp(
-                                        email: emailController.text,
-                                        password: passwordController.text);
+                                    await auth
+                                        .signUp(
+                                            email: emailController.text,
+                                            password: passwordController.text)
+                                        .then((onSuccess) {
+                                      CollectionReference UserUpdate =
+                                          FirebaseFirestore.instance
+                                              .collection("UserUpdate");
+                                      UserUpdate.add({
+                                        "firstName": firstNameController.text,
+                                        "lastName": lastNameController.text,
+                                        "phoneNumber":
+                                            phoneNumberController.text,
+                                        "email": emailController.text,
+                                      });
 
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                MenuScreen()));
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MenuScreen()));
+                                    }).catchError((e) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(e.toString()),
+                                        ),
+                                      );
+                                    });
                                   }
                                 },
                                 child: Text(

@@ -20,13 +20,21 @@ class WildfireApp extends StatelessWidget {
   const WildfireApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: () => MaterialApp(
-        title: 'Wildfire Notifications',
-        home: SplashScreen(),
-        debugShowCheckedModeBanner: false,
+    return GestureDetector(
+      onTap: (){
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild !=null){
+          FocusManager.instance.primaryFocus!.unfocus();
+        }
+      },
+      child: ScreenUtilInit(
+        builder: () => MaterialApp(
+          title: 'Wildfire Notifications',
+          home: SplashScreen(),
+          debugShowCheckedModeBanner: false,
+        ),
+        designSize: const Size(414, 896),
       ),
-      designSize: const Size(414, 896),
     );
   }
 }
