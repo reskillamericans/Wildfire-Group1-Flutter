@@ -212,7 +212,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           child: Padding(
             padding:
-                EdgeInsets.only(left: 15.w, right: 19.w, top: 8.h, bottom: 8.h),
+                EdgeInsets.only(left: 15.w, top: 8.h, bottom: 8.h),
             child: Row(
               children: [
                 Image.asset(

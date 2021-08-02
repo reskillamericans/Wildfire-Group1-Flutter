@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:wildfire1/model/cloudresult.dart';
 import 'package:wildfire1/logic/cloudstorage.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 class FireReport extends StatefulWidget {
   const FireReport({Key? key}) : super(key: key);
@@ -17,7 +19,6 @@ class FireReport extends StatefulWidget {
 
 var timestamp = new DateTime.now();
 CloudStorageResult? uploadResult;
-
 
 class _FireReportState extends State<FireReport> {
   TextEditingController detailsController = TextEditingController();
@@ -35,8 +36,6 @@ class _FireReportState extends State<FireReport> {
   final _formKey = GlobalKey<FormState>();
 
   CloudUpload upload = CloudUpload();
-
-
 
   File? pickedImage;
 
@@ -469,18 +468,56 @@ class _FireReportState extends State<FireReport> {
                           height: 127.h,
                           child: pickedImage == null
                               ? OutlinedButton(
-                                  onPressed: () async {
+                                  onPressed:
+                                      () /*async {
+                                    var status = await Permission.storage.status;
+                                    if (status.isGranted) {
+                                        final image = await selectImage();
+                                        setState(() {
+                                          pickedImage = image;
+                                        });
+                                    } */ /*else if (status.isDenied) {
+                                      final image = await selectImage();
+                                      setState(() {
+                                        pickedImage = image;
+                                      });
+                                    } */ /*else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              CupertinoAlertDialog(
+                                                title:
+                                                    Text('Camera Permission'),
+                                                content: Text(
+                                                    'This app needs gallery access to upload a photo'),
+                                                actions: <Widget>[
+                                                  CupertinoDialogAction(
+                                                    child: Text('Deny'),
+                                                    onPressed: () =>
+                                                        Navigator.of(context)
+                                                            .pop(),
+                                                  ),
+                                                  CupertinoDialogAction(
+                                                    child: Text('Settings'),
+                                                    onPressed: () =>
+                                                        openAppSettings(),
+                                                  ),
+                                                ],
+                                              ));
+                                    }
+                                  },
+*/
+                                      async {
                                     final image = await selectImage();
                                     setState(() {
                                       pickedImage = image;
                                     });
                                   },
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SizedBox(
-                                        height: 33.h,
+                                        height: 9.h,
                                       ),
                                       Align(
                                         alignment: Alignment.center,
@@ -514,9 +551,6 @@ class _FireReportState extends State<FireReport> {
                                                 126, 122, 143, 1)),
                                         textAlign: TextAlign.center,
                                       ),
-                                      SizedBox(
-                                        height: 24.h,
-                                      ),
                                     ],
                                   ),
                                   style: OutlinedButton.styleFrom(
@@ -543,9 +577,10 @@ class _FireReportState extends State<FireReport> {
                           child: TextButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                if (pickedImage!=null){
-                                uploadResult =
-                                await upload.imageUpload(pickedImage);}
+                                if (pickedImage != null) {
+                                  uploadResult =
+                                      await upload.imageUpload(pickedImage);
+                                }
                                 CollectionReference WildfireUpdates =
                                     FirebaseFirestore.instance
                                         .collection("WildfireUpdates");
@@ -559,7 +594,6 @@ class _FireReportState extends State<FireReport> {
                                   "imageName": uploadResult?.imageName,
                                   "imageUrl": uploadResult?.imageUrl,
                                 });
-                                // if (_formKey.currentState!.validate()){}
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
                               }

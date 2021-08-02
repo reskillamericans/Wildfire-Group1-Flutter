@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:wildfire1/logic/auth.dart';
 import 'package:wildfire1/ui/views/alivescreen.dart';
 import 'package:wildfire1/ui/views/askscreen.dart';
 import 'package:wildfire1/ui/views/dashboard/dashboard.dart';
+import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/updatesscreen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({Key? key}) : super(key: key);
@@ -133,13 +138,20 @@ class _MenuScreenState extends State<MenuScreen> {
               color: Color.fromRGBO(230, 235, 248, 1),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 29.w, top: 14.h, bottom: 14.h),
-              child: Text(
-                "Log Out",
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13.sp,
-                    color: Color.fromRGBO(8, 146, 133, 1)),
+              padding: EdgeInsets.only(left: 15.w, ),
+              child: TextButton(
+                onPressed: ()async{await auth.signOut(); Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            LoginScreen()));},
+                child: Text(
+                  "Log Out",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13.sp,
+                      color: Color.fromRGBO(8, 146, 133, 1)),
+                ),
               ),
             ),
             Divider(

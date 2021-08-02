@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -243,7 +244,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        MenuScreen()));
+                                        LoginScreen()));
                           },
                           child: Text("Skip",
                               style: TextStyle(
@@ -399,7 +400,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        MenuScreen()));
+                                        LoginScreen()));
                           },
                           child: Text("Get Started",
                               style: TextStyle(
