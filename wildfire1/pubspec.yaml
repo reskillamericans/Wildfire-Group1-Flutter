@@ -38,6 +38,7 @@ dependencies:
   firebase_dynamic_links: ^2.0.7
   form_field_validator: ^1.1.0
   permission_handler: ^8.1.4+2
+  persistent_bottom_nav_bar: ^4.0.2
 
 
 
