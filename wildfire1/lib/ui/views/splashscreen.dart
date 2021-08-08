@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,27 +30,29 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    if (user != null) {
-      Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => MenuScreen(),
-        ),
-      );
-    } else if (box.get("onboarded") == true) {
-      Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => LoginScreen(),
-        ),
-      );
-    } else
-      Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => OnBoarding(),
-        ),
-      );
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        Navigator.pushReplacement<void, void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => MenuScreen(),
+          ),
+        );
+      } else if (box.get("onboarded") == true) {
+        Navigator.pushReplacement<void, void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => LoginScreen(),
+          ),
+        );
+      } else
+        Navigator.pushReplacement<void, void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => OnBoarding(),
+          ),
+        );
+    });
   }
 
   elseroute() {
