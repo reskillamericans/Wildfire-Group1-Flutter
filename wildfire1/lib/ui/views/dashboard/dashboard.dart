@@ -1218,7 +1218,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {widget.viewAllUpdatesTap();},
+                                    onPressed: () {widget.askAnythingTap();},
                                     child: SvgPicture.asset(
                                       "assets/icons/help-circle.svg",
                                       height: 46.h,
