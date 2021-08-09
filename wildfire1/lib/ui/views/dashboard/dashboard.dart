@@ -747,7 +747,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                             fontSize: 13.sp,
                                                                             fontWeight: FontWeight.w700))),
                                                                 SizedBox(
-                                                                  width: 30.w,
+                                                                  width: 20.w,
                                                                 ),
                                                                 VerticalDivider(
                                                                     thickness:
@@ -755,7 +755,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                     color: Colors
                                                                         .black),
                                                                 SizedBox(
-                                                                  width: 30.w,
+                                                                  width: 20.w,
                                                                 ),
                                                                 TextButton(
                                                                     onPressed:
@@ -1222,7 +1222,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     borderRadius: BorderRadius.circular(22.r),
                                   ),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {widget.viewAllUpdatesTap();},
                                     child: SvgPicture.asset(
                                       "assets/icons/help-circle.svg",
                                       height: 46.h,
