@@ -73,6 +73,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                 color: Color.fromRGBO(229, 229, 229, 1),
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
                                       crossAxisAlignment:
@@ -130,15 +131,13 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                                           child: Padding(
                                             padding: EdgeInsets.only(
                                                 left: 32.w, bottom: 15.h),
-                                            child: Flexible(
-                                              child: Text(
-                                                wildfireUpdates[index].details,
-                                                style: TextStyle(
-                                                    fontSize: 13.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black),
-                                                textAlign: TextAlign.start,
-                                              ),
+                                            child: Text(
+                                              wildfireUpdates[index].details,
+                                              style: TextStyle(
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black),
+                                              textAlign: TextAlign.start,
                                             ),
                                           ),
                                         ),
@@ -211,8 +210,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           child: Padding(
-            padding:
-                EdgeInsets.only(left: 15.w, top: 8.h, bottom: 8.h),
+            padding: EdgeInsets.only(left: 15.w, top: 8.h, bottom: 8.h),
             child: Row(
               children: [
                 Image.asset(

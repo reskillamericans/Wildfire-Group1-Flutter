@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wildfire1/logic/auth.dart';
 import 'package:wildfire1/ui/views/alivescreen.dart';
 import 'package:wildfire1/ui/views/askscreen.dart';
 import 'package:wildfire1/ui/views/dashboard/dashboard.dart';
@@ -16,6 +15,8 @@ class MenuScreen extends StatefulWidget {
   @override
   _MenuScreenState createState() => _MenuScreenState();
 }
+
+User? user = FirebaseAuth.instance.currentUser;
 
 class _MenuScreenState extends State<MenuScreen> {
   int _currentSelected = 1;
@@ -138,13 +139,22 @@ class _MenuScreenState extends State<MenuScreen> {
               color: Color.fromRGBO(230, 235, 248, 1),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 15.w, ),
+              padding: EdgeInsets.only(
+                left: 15.w,
+              ),
               child: TextButton(
-                onPressed: ()async{await auth.signOut(); Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            LoginScreen()));},
+                onPressed: () async {
+                  await auth.signOut().then((onSuccess) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/menuscreen", (route) => false);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: Text("Logged Out!"),
+                      ),
+                    );
+                  });
+                },
                 child: Text(
                   "Log Out",
                   style: TextStyle(
@@ -164,8 +174,9 @@ class _MenuScreenState extends State<MenuScreen> {
                 height: 45.h,
                 width: 277.w,
                 child: TextButton(
-                  onPressed: () {Navigator.of(context)
-                      .pop((route) => route.isFirst);},
+                  onPressed: () {
+                    Navigator.of(context).pop((route) => route.isFirst);
+                  },
                   child: Text(
                     "Close",
                     style: TextStyle(
@@ -175,7 +186,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.r),),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
                     backgroundColor: Color.fromRGBO(255, 98, 77, 1),
                   ),
                 ),

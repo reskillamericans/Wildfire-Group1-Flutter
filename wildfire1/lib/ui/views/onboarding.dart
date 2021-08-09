@@ -198,7 +198,9 @@ class _OnBoardingState extends State<OnBoarding> {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               shape: BoxShape.circle,
-                              border: Border.all(color: Color.fromRGBO(195, 199, 210, 1), width: 1.w),
+                              border: Border.all(
+                                  color: Color.fromRGBO(195, 199, 210, 1),
+                                  width: 1.w),
                             ),
                           ),
                           SizedBox(
@@ -210,12 +212,16 @@ class _OnBoardingState extends State<OnBoarding> {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               shape: BoxShape.circle,
-                              border: Border.all(color: Color.fromRGBO(195, 199, 210, 1), width: 1.w),
+                              border: Border.all(
+                                  color: Color.fromRGBO(195, 199, 210, 1),
+                                  width: 1.w),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 38.h,),
+                      SizedBox(
+                        height: 38.h,
+                      ),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints.tightFor(width: 344.w, height: 40.h),
@@ -245,6 +251,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         LoginScreen()));
+                            box.put("onboarded", true);
                           },
                           child: Text("Skip",
                               style: TextStyle(
@@ -296,12 +303,16 @@ class _OnBoardingState extends State<OnBoarding> {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               shape: BoxShape.circle,
-                              border: Border.all(color: Color.fromRGBO(195, 199, 210, 1), width: 1.w),
+                              border: Border.all(
+                                  color: Color.fromRGBO(195, 199, 210, 1),
+                                  width: 1.w),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 38.h,),
+                      SizedBox(
+                        height: 38.h,
+                      ),
                       ConstrainedBox(
                         constraints:
                             BoxConstraints.tightFor(width: 344.w, height: 40.h),
@@ -351,43 +362,45 @@ class _OnBoardingState extends State<OnBoarding> {
             left: 35.w,
             child: currentIndex == 2
                 ? Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 12.h,
-                          width: 12.w,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(8, 146, 133, 1),
-                            shape: BoxShape.circle,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            height: 12.h,
+                            width: 12.w,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(8, 146, 133, 1),
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 28.w,
-                        ),
-                        Container(
-                          height: 12.h,
-                          width: 12.w,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(8, 146, 133, 1),
-                            shape: BoxShape.circle,
+                          SizedBox(
+                            width: 28.w,
                           ),
-                        ),
-                        SizedBox(
-                          width: 28.w,
-                        ),
-                        Container(
-                          height: 12.h,
-                          width: 12.w,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(8, 146, 133, 1),
-                            shape: BoxShape.circle,
+                          Container(
+                            height: 12.h,
+                            width: 12.w,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(8, 146, 133, 1),
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 38.h,),
-                    ConstrainedBox(
+                          SizedBox(
+                            width: 28.w,
+                          ),
+                          Container(
+                            height: 12.h,
+                            width: 12.w,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(8, 146, 133, 1),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 38.h,
+                      ),
+                      ConstrainedBox(
                         constraints:
                             BoxConstraints.tightFor(width: 344.w, height: 40.h),
                         child: ElevatedButton(
@@ -401,6 +414,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         LoginScreen()));
+                            box.put("onboarded", true);
                           },
                           child: Text("Get Started",
                               style: TextStyle(
@@ -410,8 +424,8 @@ class _OnBoardingState extends State<OnBoarding> {
                               textAlign: TextAlign.center),
                         ),
                       ),
-                  ],
-                )
+                    ],
+                  )
                 : Container(
                     color: Colors.transparent,
                   ),

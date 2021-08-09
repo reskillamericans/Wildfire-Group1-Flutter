@@ -1,16 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wildfire1/logic/auth.dart';
-import 'package:wildfire1/model/firebaseuser.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-// final FirebaseAuth auth = FirebaseAuth.instance;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -480,12 +477,29 @@ class _SignUpPageState extends State<SignUpPage> {
                                             phoneNumberController.text,
                                         "email": emailController.text,
                                       });
-
+                                      emailController.clear();
+                                      passwordController.clear();
+                                      firstNameController.clear();
+                                      lastNameController.clear();
+                                      phoneNumberController.clear();
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
                                                   MenuScreen()));
+                                      FirebaseAuth.instance
+                                          .authStateChanges()
+                                          .listen((User? user) {
+                                        if (user != null) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(duration: Duration(seconds: 1),
+                                              content: Text(
+                                                  "Registration Successful!"),
+                                            ),
+                                          );
+                                        }
+                                      });
                                     }).catchError((e) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
