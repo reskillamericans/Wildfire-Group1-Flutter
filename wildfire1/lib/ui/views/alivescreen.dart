@@ -33,6 +33,7 @@ class _AliveScreenState extends State<AliveScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         toolbarHeight: 79.h,
         title: Padding(
@@ -437,12 +438,21 @@ class _AliveScreenState extends State<AliveScreen> {
                             "transportation": transportation,
                             "medicalCheck": medicalCheck,
                             "other": other,
+                          }).then((onSuccess) {
+                            emergencyNameController.clear();
+                            emergencyPhoneController.clear();
+                            emergencyRelationshipController.clear();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MenuScreen()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(duration: Duration(seconds: 1),
+                                content: Text("Submission Successful!"),
+                              ),
+                            );
                           });
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      MenuScreen()));
                         }
                       },
                       child: Row(

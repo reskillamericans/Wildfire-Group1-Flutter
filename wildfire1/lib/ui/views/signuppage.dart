@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -486,6 +487,19 @@ class _SignUpPageState extends State<SignUpPage> {
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
                                                   MenuScreen()));
+                                      FirebaseAuth.instance
+                                          .authStateChanges()
+                                          .listen((User? user) {
+                                        if (user != null) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(duration: Duration(seconds: 1),
+                                              content: Text(
+                                                  "Registration Successful!"),
+                                            ),
+                                          );
+                                        }
+                                      });
                                     }).catchError((e) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -519,7 +533,6 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
 }
 
 _fieldFocusChange(

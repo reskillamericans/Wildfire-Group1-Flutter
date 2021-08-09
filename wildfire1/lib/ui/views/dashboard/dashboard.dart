@@ -687,6 +687,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                           Navigator.pop(
                                                                               context,
                                                                               widget.imAliveTap());
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            SnackBar(duration: Duration(seconds: 1),
+                                                                              content: Text("Login Successful!"),
+                                                                            ),
+                                                                          );
                                                                         }).catchError((e) {
                                                                           ScaffoldMessenger.of(context)
                                                                               .showSnackBar(
@@ -1094,6 +1100,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                                       phoneNumberController.clear();
                                                                                                       Navigator.pop(context, widget.imAliveTap());
                                                                                                       Navigator.pop(context, widget.imAliveTap());
+                                                                                                      ScaffoldMessenger.of(context)
+                                                                                                          .showSnackBar(
+                                                                                                        SnackBar(duration: Duration(seconds: 1),
+                                                                                                          content: Text("Registration Successful!"),
+                                                                                                        ),
+                                                                                                      );
                                                                                                     }).catchError((e) {
                                                                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                                                                         SnackBar(

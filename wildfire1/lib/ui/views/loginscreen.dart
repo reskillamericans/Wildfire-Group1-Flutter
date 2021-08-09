@@ -235,6 +235,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         MenuScreen()));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(
+                              SnackBar(duration: Duration(seconds: 1),
+                                content: Text("Login Successful!"),
+                              ),
+                            );
                           }).catchError((e) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -288,8 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    SignUpPage()));
+                                builder: (BuildContext context) => SignUpPage()));
                       },
                       child: Text("Create an Account",
                           style: TextStyle(
@@ -313,7 +318,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) => MenuScreen()));
-
                 },
                 child: Center(
                   child: Text(

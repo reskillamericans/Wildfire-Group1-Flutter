@@ -593,9 +593,20 @@ class _FireReportState extends State<FireReport> {
                                   "when": timestamp,
                                   "imageName": uploadResult?.imageName,
                                   "imageUrl": uploadResult?.imageUrl,
-                                });
+                                }).then((onSuccess){
+                                  firstNameController.clear();
+                                  lastNameController.clear();
+                                  phoneNumberController.clear();
+                                  locationController.clear();
+                                  detailsController.clear();
                                 Navigator.of(context)
                                     .popUntil((route) => route.isFirst);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                  SnackBar(duration: Duration(seconds: 1),
+                                    content: Text("Submission Successful!"),
+                                  ),
+                                );});
                               }
                             },
                             child: Text(
