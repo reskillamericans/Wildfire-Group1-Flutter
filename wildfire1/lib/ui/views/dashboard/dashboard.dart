@@ -729,7 +729,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                             child: Row(
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
-                                                                      .center,
+                                                                      .spaceEvenly,
                                                               children: [
                                                                 TextButton(
                                                                     onPressed:
@@ -746,17 +746,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                 Colors.black,
                                                                             fontSize: 13.sp,
                                                                             fontWeight: FontWeight.w700))),
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
+
                                                                 VerticalDivider(
                                                                     thickness:
                                                                         1.w,
                                                                     color: Colors
                                                                         .black),
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
+
                                                                 TextButton(
                                                                     onPressed:
                                                                         () {
