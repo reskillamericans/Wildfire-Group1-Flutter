@@ -8,8 +8,6 @@ import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:wildfire1/ui/views/onboarding.dart';
 
-import 'dashboard/dashboard.dart';
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();

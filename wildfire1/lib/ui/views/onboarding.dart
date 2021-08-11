@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoarding extends StatefulWidget {
