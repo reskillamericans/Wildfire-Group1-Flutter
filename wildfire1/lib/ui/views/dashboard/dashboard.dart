@@ -69,6 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 79.h,
         title: Padding(
           padding: EdgeInsets.only(top: 25.h, right: 16.w),

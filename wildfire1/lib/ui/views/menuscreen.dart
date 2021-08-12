@@ -145,7 +145,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 onPressed: () async {
                   await auth.signOut().then((onSuccess) {
                     Navigator.pushNamedAndRemoveUntil(
-                        context, "/menuscreen", (route) => false);
+                        context, "/", (route) => false);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         duration: Duration(seconds: 1),

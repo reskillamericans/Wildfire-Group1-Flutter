@@ -235,16 +235,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         MenuScreen()));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(
-                              SnackBar(duration: Duration(seconds: 1),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 1),
                                 content: Text("Login Successful!"),
                               ),
                             );
                           }).catchError((e) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                  content: Text(e.toString()),
+                                content: Text(e.toString()),
                               ),
                             );
                           });
@@ -272,8 +272,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      onPressed: () {emailController.clear();
-                      passwordController.clear();
+                      onPressed: () {
+                        emailController.clear();
+                        passwordController.clear();
                       },
                       child: Text("Forgot Password?",
                           style: TextStyle(
@@ -294,7 +295,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => SignUpPage()));
+                                builder: (BuildContext context) =>
+                                    SignUpPage()));
                       },
                       child: Text("Create an Account",
                           style: TextStyle(
@@ -346,7 +348,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }
 
 _fieldFocusChange(

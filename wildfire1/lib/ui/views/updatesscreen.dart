@@ -20,6 +20,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         toolbarHeight: 79.h,
         title: Padding(

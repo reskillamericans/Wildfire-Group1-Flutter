@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 2), box.get("status") == "true" ? elseroute : route);
+        Duration(seconds: 1), box.get("status") == "true" ? elseroute : route);
     super.initState();
   }
 
