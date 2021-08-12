@@ -8,8 +8,6 @@ import 'package:wildfire1/ui/views/loginscreen.dart';
 import 'package:wildfire1/ui/views/menuscreen.dart';
 import 'package:wildfire1/ui/views/onboarding.dart';
 
-import 'dashboard/dashboard.dart';
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -25,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(
-        Duration(seconds: 2), box.get("status") == "true" ? elseroute : route);
+        Duration(seconds: 1), box.get("status") == "true" ? elseroute : route);
     super.initState();
   }
 
